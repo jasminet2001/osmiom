@@ -56,10 +56,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             return
         }
 
-        // Add a marker in Sydney and move the camera
-//        val sydney = LatLng(-34.0, 151.0)
-//        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
         mMap.isMyLocationEnabled = true
         // Get the last known location
         fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
