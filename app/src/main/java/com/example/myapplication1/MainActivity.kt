@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity() {
 
     private val handler = Handler(Looper.getMainLooper())
     private val measurementInterval: Long = 5000
-    private val measurementCounts = mutableMapOf<Int, Int>()
 
     private var currentLatitude: Double = 0.0
     private var currentLongitude: Double = 0.0
@@ -58,7 +57,6 @@ class MainActivity : AppCompatActivity() {
         myLocationTextView = findViewById(R.id.loc)
         nodeIdTextView = findViewById(R.id.answer)
         signalStrengthTextView = findViewById(R.id.pow)
-        measurementCountTextView = findViewById(R.id.measurement_count)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         telephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
@@ -187,9 +185,7 @@ class MainActivity : AppCompatActivity() {
         currentNodeId = cellId
         currentSignalStrength = signalStrength
 
-        val count = measurementCounts.getOrDefault(cellId, 0) + 1
-        measurementCounts[cellId] = count
-        measurementCountTextView.text = "Measurement Count for Node $cellId: $count"
+        
     }
 
 
