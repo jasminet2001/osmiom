@@ -1,4 +1,4 @@
-package com.example.ril
+package com.example.test
 
 import org.junit.Test
 
