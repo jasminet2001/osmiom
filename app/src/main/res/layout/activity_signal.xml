@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#047A89"
+    android:background="#E5BFF4"
     tools:context=".SignalActivity">
 
 
@@ -14,11 +14,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="41dp"
-        android:layout_marginTop="115dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="13dp"
-        android:backgroundTint="#0B6E7A"
+        android:backgroundTint="#D26BF9"
         android:contentDescription="my location"
         app:layout_constraintEnd_toStartOf="@+id/loc"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_mylocation" />
@@ -27,9 +28,9 @@
         android:id="@+id/loc"
         android:layout_width="199dp"
         android:layout_height="49dp"
-        android:layout_marginTop="115dp"
-        android:layout_marginEnd="102dp"
-        android:background="#FF99C3BF"
+        android:layout_marginTop="212dp"
+        android:layout_marginEnd="104dp"
+        android:background="@color/white"
         android:text="Location"
         android:textColor="#141313"
         android:textColorHighlight="#121111"
@@ -40,9 +41,9 @@
         android:id="@+id/pow"
         android:layout_width="166dp"
         android:layout_height="60dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="123dp"
-        android:background="#FF99C3BF"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="120dp"
+        android:background="@color/white"
         android:text="Power"
         android:textColor="#121111"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,13 +53,23 @@
         android:id="@+id/answer"
         android:layout_width="191dp"
         android:layout_height="40dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="110dp"
-        android:background="#99C3BF"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="108dp"
+        android:background="@color/white"
         android:text="Answer"
         android:textColor="#121111"
         android:textColorHighlight="#121111"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loc" />
+
+    <Button
+        android:id="@+id/Home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="20dp"
+        android:text="Home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

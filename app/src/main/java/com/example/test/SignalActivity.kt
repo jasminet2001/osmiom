@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.telephony.CellInfo
@@ -21,9 +22,25 @@ import android.telephony.CellInfoWcdma
 import android.telephony.CellSignalStrengthGsm
 import android.telephony.TelephonyManager
 import android.util.Log
+import android.widget.Button
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import com.example.test.model.CellInfoEntity
+import com.example.test.viewmodel.cellView
+import com.example.test.viewmodel.cellInfoViewFactory
+import androidx.activity.viewModels
+import androidx.lifecycle.ViewModelProvider
+import com.example.test.database.CellDB
+import com.example.test.database.cellDao
+import com.example.test.repository.CellRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import com.example.test.database.CellDatabaseSingleton
+
 
 class SignalActivity : AppCompatActivity() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -44,10 +61,27 @@ class SignalActivity : AppCompatActivity() {
     private var currentNodeId: Int = 0
     private var currentSignalStrength: Int = 0
 
+    private lateinit var cellViewModel: cellView
+    private lateinit var repository: CellRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_signal)
+
+        // Initialize the database and repository
+        val database = CellDatabaseSingleton.getDatabase(this)
+        repository = CellRepository(database.cellInfoDao())
+
+        // Initialize the ViewModel with the repository
+        cellViewModel = ViewModelProvider(this, cellInfoViewFactory(repository)).get(cellView::class.java)
+
+        val homeButton = findViewById<Button>(R.id.Home)
+        homeButton.setOnClickListener {
+            // Create an Intent to start MapActivity
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -190,6 +224,15 @@ class SignalActivity : AppCompatActivity() {
     }
 
 
+    private fun saveDataToDatabase() {
+        val cellInfo = CellInfoEntity(
+            cellLocationX = currentLatitude,
+            cellLocationY = currentLongitude,
+            cellId = currentNodeId,
+            signalStrength = currentSignalStrength,
+        )
+        cellViewModel.insert(cellInfo)
+    }
 
     private fun startRealTimeMeasurements() {
         handler.postDelayed(object : Runnable {
