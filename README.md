@@ -1,1 +1,3 @@
-در این پروژه با استفاده از دسترسی به موقعیت مکانی کاربر gps و سیگنال دریافتی کاربر و اندازه گیری مکرر انها برای یک سلول ( که با داشتن شناسه سلول ها انها را جدا میکنیم) موقعیت مکانی سلول را تخمین میزنیم. که میتوان از الگوریتم های متفاوتی استفاده کرد 
+# Project Osmiom
+
+In this project, we estimate the location of mobile cells by accessing the location of the user's GPS and the signals repeatedly received by the user (which we separate by cell ID).
